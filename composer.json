@@ -11,6 +11,7 @@
         "laravel/tinker": "^1.0"
     },
     "require-dev": {
+        "doctrine/dbal": "^2.3",
         "barryvdh/laravel-debugbar": "3.2",
         "barryvdh/laravel-ide-helper": "2.5",
         "beyondcode/laravel-dump-server": "^1.0",
@@ -53,8 +54,9 @@
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-            "@php artisan ide-helper:generate",
-            "@php artisan ide-helper:meta"
+            "php artisan ide-helper:generate",
+            "php artisan ide-helper:meta",
+            "php artisan optimize"
         ]
     },
     "config": {
