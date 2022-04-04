@@ -92,13 +92,13 @@ class CategoryController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function edit($id, BlogCategoryRepository $categoryRepository)
+    public function edit($id)
     {
-        $item = $categoryRepository->getForEdit($id);
+        $item = $this->blogCategoryRepository->getForEdit($id);
         if (empty($item)) {
             abort(404);
         }
-        $categoryList = $categoryRepository->getForComboBox();
+        $categoryList = $this->blogCategoryRepository->getForComboBox();
         return view('blog.admin.categories.edit', compact('categoryList','item'));
     }
 
@@ -112,7 +112,7 @@ class CategoryController extends BaseController
      */
     public function update(BlogCategoryUpdateRequest $request, int $id)
     {
-        $item = BlogCategory::find($id);
+        $item = $this->blogCategoryRepository->getForEdit($id);
         if (empty($item)) {
             return back()
                 ->withErrors(['msg' => 'Запись id=[' . $id . '] не найдена'])
