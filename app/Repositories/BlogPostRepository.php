@@ -26,6 +26,14 @@ class BlogPostRepository extends CoreRepository
             ->select($columns)
             ->with(['category:id,title', 'user:id,name'])
             ->paginate($perPage);
+
+        return $result;
+    }
+
+
+    public function getForEdit($id)
+    {
+        $result = $this->startConditions()->find($id);
         return $result;
     }
 }
