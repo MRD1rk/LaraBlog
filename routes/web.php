@@ -15,26 +15,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['namespace' => 'Blog', 'prefix' => 'blog'], function () {
-    Route::resource('posts', 'PostController')->names('blog.posts');
-});
-
-$groupData = [
-  'namespace' => 'Blog\Admin',
-    'prefix' => 'admin/blog'
-];
-Route::group($groupData, function () {
-    $methods = ['index', 'edit', 'store', 'update', 'create'];
-    Route::resource('categories', 'CategoryController')
-        ->only($methods)
-        ->names('blog.admin.categories');
-    Route::resource('posts', 'PostController')
-        ->except('show')
-        ->names('blog.admin.posts');
-
-});
-//Route::resource('rest', 'RestTestController')->names('restTest');
+Route::group(
+    [
+        'prefix' => 'parser'
+    ],
+    function () {
+        Route::get('', 'ParserController@index')->name('parser.index');
+        Route::get('test', 'ParserController@test')->name('parser.test');
+        Route::post('/parse','ParserController@parse')->name('parser.parse');
+        Route::post('/union','ParserController@union')->name('parser.union');
+        Route::get('/parsed/{type}', 'ParserController@parsed')->name('parser.parsed');
+        Route::get('/download/{type}/{filename}', 'ParserController@download')->name('parser.download');
+    }
+);
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

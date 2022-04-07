@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BlogCategoryCreateRequest extends FormRequest
+class ParserParseRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,6 @@ class BlogCategoryCreateRequest extends FormRequest
      */
     public function authorize()
     {
-//        return auth()->check();
         return true;
     }
 
@@ -25,10 +24,15 @@ class BlogCategoryCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:5|max:200',
-            'slug' => 'max:200',
-            'description' => 'string|min:3|max:500',
-            'parent_id' => 'required|integer|exists:blog_categories,id'
+            'selected.*' => 'required|regex:(.sql)',
+            'format' => 'in:xml,txt,csv'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'selected.required' => 'select!'
         ];
     }
 }

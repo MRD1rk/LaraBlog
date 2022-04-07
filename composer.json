@@ -6,7 +6,10 @@
     "type": "project",
     "require": {
         "php": "^7.1.3",
+        "asika/sql-splitter": "^1.0",
         "fideloper/proxy": "^4.0",
+        "greenlion/php-sql-parser": "^4.5",
+        "lajosbencz/stream-parse-sql": "^0.1.1",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0"
     },
@@ -55,8 +58,7 @@
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "php artisan ide-helper:generate",
-            "php artisan ide-helper:meta",
-            "php artisan optimize"
+            "php artisan ide-helper:meta"
         ]
     },
     "config": {
