@@ -22,7 +22,6 @@ class ParserController extends Controller
 
     public function index()
     {
-        $a = 'test';
         $files = $this->fileService->getFilesFromDir($this->fileService::SOURCE_FILES_PATH);
         $availableFormats = $this->fileService::AVAILABLE_FORMATS;
 
